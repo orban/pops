@@ -1,0 +1,58 @@
+Starters	MP	FG	FGA	FG%	3P	3PA	3P%	FT	FTA	FT%	ORB	DRB	TRB	AST	STL	BLK	TOV	PF	PTS	+/-
+A.J. Price	29:24	2	13	.154	2	9	.222	1	1	1.000	1	1	2	6	0	0	1	1	7	-11
+Emeka Okafor	24:35	4	10	.400	0	0		2	4	.500	5	2	7	0	0	4	1	1	10	-5
+Trevor Ariza	24:35	3	8	.375	2	4	.500	1	2	.500	1	2	3	4	3	2	0	0	9	-9
+Bradley Beal	21:33	2	8	.250	2	4	.500	2	2	1.000	0	3	3	3	1	0	2	1	8	-16
+Trevor Booker	16:45	2	9	.222	0	1	.000	0	0		1	0	1	1	1	1	4	4	4	-15
+Reserves	MP	FG	FGA	FG%	3P	3PA	3P%	FT	FTA	FT%	ORB	DRB	TRB	AST	STL	BLK	TOV	PF	PTS	+/-
+Jordan Crawford	28:42	4	13	.308	0	6	.000	3	4	.750	1	2	3	5	1	1	1	1	11	0
+Martell Webster	23:25	4	6	.667	1	3	.333	0	0		0	3	3	1	2	0	0	1	9	-1
+Jan Vesely	21:14	3	4	.750	0	0		1	4	.250	3	1	4	1	0	1	1	3	7	-2
+Chris Singleton	17:11	2	7	.286	0	1	.000	0	0		2	2	4	2	2	0	1	2	4	+1
+Jannero Pargo	16:21	2	6	.333	1	4	.250	2	2	1.000	0	1	1	3	0	0	1	3	7	+7
+Earl Barron	16:15	4	6	.667	0	0		0	1	.000	4	4	8	0	1	1	0	2	8	+1
+Team Totals	240	32	90	.356	8	32	.250	12	20	.600	18	21	39	26	11	10	12	19	84	
+
+
+	Advanced Box Score Stats
+Starters	MP	TS%	eFG%	ORB%	DRB%	TRB%	AST%	STL%	BLK%	TOV%	USG%	ORtg	DRtg
+A.J. Price	29:24	.260	.231	3.0	4.2	3.5	34.1	0.0	0.0	6.9	21.3	78	118
+Emeka Okafor	24:35	.425	.400	18.1	10.0	14.7	0.0	0.0	13.2	7.8	22.5	95	110
+Trevor Ariza	24:35	.507	.500	3.6	10.0	6.3	29.9	6.7	6.6	0.0	15.6	125	98
+Bradley Beal	21:33	.450	.375	0.0	17.1	7.2	24.3	2.5	0.0	18.4	21.9	89	106
+Trevor Booker	16:45	.222	.222	5.3	0.0	3.1	10.9	3.3	4.9	30.8	33.6	39	110
+Reserves	MP	TS%	eFG%	ORB%	DRB%	TRB%	AST%	STL%	BLK%	TOV%	USG%	ORtg	DRtg
+Jordan Crawford	28:42	.373	.308	3.1	8.6	5.4	33.0	1.9	2.8	6.3	23.8	93	110
+Martell Webster	23:25	.750	.750	0.0	15.8	6.6	8.6	4.7	0.0	0.0	11.1	149	102
+Jan Vesely	21:14	.608	.750	12.6	5.8	9.7	9.0	0.0	3.8	14.8	13.8	107	115
+Chris Singleton	17:11	.286	.286	10.3	14.3	12.0	21.2	6.4	0.0	12.5	20.2	74	98
+Jannero Pargo	16:21	.509	.417	0.0	7.5	3.2	33.7	0.0	0.0	12.7	20.9	108	115
+Earl Barron	16:15	.621	.667	21.9	30.3	25.4	0.0	3.4	5.0	0.0	17.2	134	95
+Team Totals	240	.425	.400	33.3	53.8	41.9	81.3	12.5	17.2	10.8	100.0	95.5	106.9
+
+ 'team_3P': 8.000000007,
+ 'team_3PA': 32.000000007,
+ 'team_3P_per': 0.25000000016406254,
+ 'team_AST': 26.000000007,
+ 'team_AST_per': 204.700000007,
+ 'team_BLK': 10.000000007,
+ 'team_BLK_per': 36.300000007,
+ 'team_DRB': 21.000000007,
+ 'team_DRB_per': 123.600000007,
+ 'team_FG': 32.000000007,
+ 'team_FGA': 90.00000000700001,
+ 'team_FG_per': 0.3555555556056789,
+ 'team_FT': 12.000000007,
+ 'team_FTA': 20.000000007,
+ 'team_FT_per': 0.60000000014,
+ 'team_ORB': 18.000000007,
+ 'team_ORB_per': 77.900000007,
+ 'team_PF': 19.000000007,
+ 'team_PTS': 84.00000000700001,
+ 'team_STL': 11.000000007,
+ 'team_STL_per': 28.900000007000003,
+ 'team_TOV': 12.000000007,
+ 'team_TRB': 39.000000007,
+ 'team_TRB_per': 97.100000007,
+ 'team_USG_per': 221.90000000700002,
+ 'team_plub_minus': -49.999999993}

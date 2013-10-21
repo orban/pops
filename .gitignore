@@ -1,0 +1,14 @@
+*.pem
+.DS_Store
+
+exploring_only/*
+*.zip
+*local*
+
+# ==========================
+# annoying emacs buffer files
+# ==========================
+*~
+\#*#
+*\#*
+*\#

@@ -1,0 +1,31 @@
+id,name,tag
+1,Atlanta Hawks,ATL
+2,Boston Celtics,BOS
+3,Brooklyn Nets,BRK
+4,Charlotte Bobcats,CHA
+5,Chicago Bulls,CHI
+6,Cleveland Cavaliers,CLE
+7,Dallas Mavericks,DAL
+8,Denver Nuggets,DEN
+9,Detroit Pistons,DET
+10,Golden State Warriors,GSW
+11,Houston Rockets,HOU
+12,Indiana Pacers,IND
+13,Los Angeles Clippers,LAC
+14,Los Angeles Lakers,LAL
+15,Memphis Grizzlies,MEM
+16,Miami Heat,MIA
+17,Milwaukee Bucks,MIL
+18,Minnesota Timberwolves,MIN
+19,New Orleans Pelicans,NOH
+20,New York Knicks,NYK
+21,Oklahoma City Thunder,OKC
+22,Orlando Magic,ORL
+23,Philadelphia 76ers,PHI
+24,Phoenix Suns,PHO
+25,Portland Trail Blazers,POR
+26,Sacramento Kings,SAC
+27,San Antonio Spurs,SAS
+28,Toronto Raptors,TOR
+29,Utah Jazz,UTA
+30,Washington Wizards,WAS
