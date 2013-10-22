@@ -364,14 +364,20 @@ df = pd.DataFrame(columns=['Reserve_F_STL_per',
  'reserves_ORB',
  'Reserve_C_BLK_per',
  'reserves_ORB_per',
+ 'result',
  'starters_PTS'])
 
 for i in range(len(df_links)):
     link = df_links.iloc[i,:]['link']
+    game = df_links.iloc[i,:]['game']
 
     print '-' * 30
     counter += 1
     print counter
+
+    # --------------------------------
+    # retrieve the data from MongoDB
+    # --------------------------------
     data = mongo_box_score.find_one({'link':link})
     print link
     print data['link']
@@ -1468,16 +1474,26 @@ Team Totals	240	.530	.500	46.2	66.7	58.1	61.1	8.0	8.5	18.4	100.0	106.9	95.5
     # ====================================
     # putting the data into the dataframe
     # ====================================
+    home_team_score = home_team_dict['team_PTS']
+    away_team_score = away_team_dict['team_PTS']
+    
+    if home_team_score > away_team_score:
+        home_team_dict['result'] = 1
+        away_team_dict['result'] = 0
+    elif home_team_score < away_team_score:
+        home_team_dict['result'] = 0
+        away_team_dict['result'] = 1
+    else:
+        print "error, the team's scores do not a strict inequality"
+
     df = df.append(pd.Series(away_team_dict), ignore_index=True)
     df = df.append(pd.Series(home_team_dict), ignore_index=True)
 
 
-# putting data into the psql database
-table_name = 'df_games_2013'
-cnx_exe('DROP TABLE if EXISTS %s' %table_name)
-pdpsql.write_frame(df, table_name, cnx)
+# # putting data into the psql database
+# table_name = 'df_games_2013'
+# cnx_exe('DROP TABLE if EXISTS %s' %table_name)
+# pdpsql.write_frame(df, table_name, cnx)
 
-#2a. do it for every team
-#2. construct the df
-#3. stick it into postgres as text for now
+
 

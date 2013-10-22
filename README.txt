@@ -50,3 +50,5 @@ popsfundamental=# \d+ df_games;
  reserves_trb_per      | text |           | extended |              | 
  reserves_pf           | text |           | extended |              | 
 ...It has been cut off.
+
+The text fields are:
