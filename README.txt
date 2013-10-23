@@ -1,3 +1,6 @@
+DRAFT DRAFT DRAFT!!!
+
+
 Python Files Description:
 ==========================================================
 
@@ -52,3 +55,5 @@ popsfundamental=# \d+ df_games;
 ...It has been cut off.
 
 The text fields are:
+team
+opp
