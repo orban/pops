@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" ng-app="pops">
+<head>
+	<meta charset="utf-8">
+  	<title>Pop's Winning Factors</title>
+    <link rel="icon" href="/static/images/logo2.png" />
+	<link rel="stylesheet" href="/static/stylesheets/bootstrap.css">
+  	<link rel="stylesheet" href="/static/stylesheets/pops.css"/>
+  	<script src="/static/js/jquery-1.9.1.js"></script>
+	<script src="/static/js/angular.min.js"></script>
+	<script src="/static/js/d3.v3.min.js"></script>
+    <style>
+      	circle {
+      		stroke:black;
+      		stroke-width:1px;
+      		fill:black;
+      		opacity:0.5;
+     	}
+      	rect {
+      		stroke:black;
+      		stroke-width:1px;
+      		fill:black;
+      		opacity:0.5;
+     	}
+      	path.link {
+      		fill: none;
+      	  	stroke: #666;
+      	  	stroke-width: 1.5px;
+      	}
+	</style>	
+	
+</head>
+
+<body>
+	
+	<div id='row_container' ng-controller="ctrl_feature_selection">
+		
+		<div id='box1'>
+			<select multiple id='feature_selection' ng-model="selectedValues" ng-change="selectionsChanged()">
+			</select>
+		</div>
+		
+		<div id='box2'>
+			<script src="/static/js/dag.js"></script>
+		</div>
+		
+		<div id='box1' style='background:gray;'>
+          <button id="butt_hist" ng-click="submit()">analyze</button>
+
+          <br><br>
+          <div>
+            <p id="analyzing" style="color: blue;"></p>
+		    {{features_selection_result|json}}
+          </div>
+		</div>
+		
+	</div>
+	
+</body>
+<script src="/static/js/pops.js"></script>
+</html>

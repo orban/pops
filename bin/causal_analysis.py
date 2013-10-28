@@ -45,6 +45,11 @@ df_games_complete = psql.read_frame('SELECT * FROM df_games_2013;', cnx)
 # Data Frame Preparation
 # ======================
 
+try:
+    feature_list = sys.argv[1].split(',')
+except:
+    pass
+
 all_columns = set(df_games_complete.columns)
 # removing some features in the dataset
 ignored_features = {'team', 'opp', 'game_id', 
@@ -151,6 +156,7 @@ df_CI['result'] = df_games['result']
 # ==========================
 # testing, tmpt files
 # ==========================
-with open('features.json', "wb") as f:
-    json.dump({i:x for i,x in enumerate(df_games_complete.columns)},f)
+if __name__ == '__main__':
+# with open('features.json', "wb") as f:
+#     json.dump({i:x for i,x in enumerate(df_games_complete.columns)},f)
 
