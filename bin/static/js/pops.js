@@ -17,8 +17,11 @@ $(document).ajaxComplete(function() {
 	document.getElementById("feature_selection").innerHTML = _html;
 });
 
+//control for the selection box and the submit button
 app.controller('ctrl_feature_selection', function($scope, $http) {
 	$(document).ajaxComplete(function() {
+
+        //selection box
 		$scope.selectionsChanged = function(){
 			var _selected = [];
             var _html = '';
@@ -27,14 +30,11 @@ app.controller('ctrl_feature_selection', function($scope, $http) {
 				_selected.push(parseInt(/^[0-9]+/g.exec($scope.selectedValues[i])));
 			};
 			$scope.selection_result = [];	
-            // var _feature_list = [];
 			for(var i in features_dict) {
        			if (-1 != $.inArray(parseInt(i), _selected)) {
 					$scope.selection_result.push(features_dict[i]);						
-					// _feature_list.push(features_dict[i]);						
 				};
 			};
-            
             
             $("#selected-features").html('');
             for (var i in $scope.selection_result){
@@ -46,6 +46,7 @@ app.controller('ctrl_feature_selection', function($scope, $http) {
             $("#selected-features").html(_html);
 		};
 
+        //submit for analysis
         $scope.submit = function(){
 			var _selected = [];
 			for (var i in $scope.selectedValues){
@@ -62,22 +63,19 @@ app.controller('ctrl_feature_selection', function($scope, $http) {
 
             $.ajax({
                 type:"POST",
-                //url: "http://54.200.190.191:5000/clf",
                 url: _route,
                 data: {"data": _json},
                 beforeSend: function(){
                     $("#analyzing").text("  "+"...ANALYZING...");
                 },
-                ajaxError: function() {
-                    //to be added later
+                ajaxError: function(e) {
+                    console.log(e);
                 },
                 success: function(response) {
                     var data = response['output'];
-                    console.log(data);
                     $("#analyzing").text("");
                     d3.select("svg").remove();
                     draw(data);
-                    // location.reload();
                 }});
         };				
 	});	

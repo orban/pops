@@ -1,0 +1,233 @@
+
+/* colors for pop's app: */
+/* black: #000000 */
+/* dove gray: #666666 */
+/* silver: #CCCCCC */
+/* white: #FFFFFF */
+/* baby blue: #ACD1E9 */
+/* solid blue: #206BA4 */
+
+/* ::root { */
+/*     var-bg-color: green; */
+/*     var-link-color: #086A87; */
+/* } */
+
+/* a:link {color:var-link-color;}    */
+/* a:visited {color:var-link-color;} */
+/* a:hover {color:var-link-color;}   */
+/* a:active {color:var-link-color;}  */
+
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 200px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-nav li {
+  line-height: 40px;
+  text-indent: 20px;
+}
+
+.sidebar-nav li a {
+  color: rgb(180,180,180);/*var-nav-text-color*/
+  display: block;
+  text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+  height: 65px;
+  line-height: 60px;
+  font-size: 18px;
+}
+
+.sidebar-nav li a:hover {
+  color: white;
+  background: none;
+  text-decoration: none;
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+  text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    background: none;
+}
+
+#wrapper.active #sidebar-wrapper {
+  position: relative;
+  transition: all 0.4s ease 0s;
+}
+
+/* =========================================== */
+/* =========================================== */
+
+/* some colors to work with: */
+/* #1f77b4 #ff7f0e #2ca02c #d62728 #9467bd  */
+/* #8c564b #e377c2 #7f7f7f #bcbd22 #17becf */
+
+/* colors for pop's app: */
+/* black: #000000 */
+/* dove gray: #666666 */
+/* silver: #CCCCCC */
+/* white: #FFFFFF */
+/* baby blue: #ACD1E9 */
+/* solid blue: #206BA4 */
+
+/* rect { */
+/*     stroke:black; */
+/*     stroke-width:1px; */
+/*     fill:black; */
+/*     opacity:0.5; */
+/* } */
+
+/* line.edge { */
+/*     fill: none; */
+/*     /\* stroke: #666; *\/ */
+/*     stroke-width: 1.5px; */
+/* } */
+
+html{
+    height: 100%;
+}
+body {
+    padding: 50px;
+    /* min-width: 100px; */
+    /* max-width: 1100px; */
+    font-family: Monospace;
+    /* color: black; */
+	background-color: rgb(7,7,7);
+    width: 1200px;
+    height: 100%;
+    color: rgb(210,210,210);/*var-text-color*/
+}
+
+/* #page-wrapper{ */
+/*   width:1100px; */
+/*   height:100%; */
+/* } */
+
+#sidebar-wrapper {
+  float:left;
+  width: 200px;
+  background: rgb(7,7,7);/*var-bg-color*/
+  position: fixed;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 1000;
+  transition: all 0.4s ease 0s;
+}
+
+#content-wrapper {
+  float:right;
+  /* position: relative; */
+  width: 1000px;
+  /* width: 500px; */
+  background-color: rgb(7,7,7);/*var-bg-color*/
+  height: 100%;
+  font-size: 14px;
+}
+
+#content-header {
+  float:top;
+  height: 65px;
+  width: 600px;
+  line-height: 65px;
+  font-size: 24px;
+}
+
+#row-container {
+/*    position: relative;
+    margin: 0 15px 15px 0;	
+    padding: 5%;*/
+	width: 100%;
+    height: 650px;
+    background: rgb(7,7,7);/*var-bg-color*/
+}
+#box1 {
+	float:left;
+    width: 20%;
+	height: 50%;
+    background: rgb(7,7,7);/*var-bg-color*/
+    font-size: 12 px;
+}
+
+#analyzing {
+    text-align: center;
+}
+
+#feature_selection {
+	width: 95%;
+  	height:80%;
+	/* padding:.5%; */
+	/* border:1px solid gray; */
+	/* margin:10px; */
+    background: rgb(7,7,7);/*var-bg-color*/
+    color: rgb(210,210,210);/*var-text-color*/
+    background-color: rgb(7,7,7);
+    border-color: rgb(210,210,210);
+    font-size: 12px;
+}
+
+/* #feature_selction > textarea { */
+/*     background-color: rgb(7,7,7);/\*var-bg-color*\/ */
+/*     border-color: rgb(25,25,25); */
+/* } */
+
+#feature_selection::-webkit-scrollbar {
+    width: 0;
+}
+
+#feature_selection:active,
+#feature_selection:focus,
+#feature_selection:hover,
+#feature_selection:checked {
+    border-color: white;
+}
+
+#butt_hist {
+    border-radius: 3px;
+    background-color: rgb(7,7,7);/*var-bg-color*/
+    border-style:solid;
+    color: rgb(210,210,210);/*var-text-color*/
+    font-size: 14px;
+}
+
+#butt_hist:active,
+#butt_hist:focus,
+#butt_hist:hover {
+  text-decoration: none;
+  color: white;
+  border-color: white;
+  background-color: rgb(25,25,25);
+}
+
+#selected-features ol{
+    list-style-position: inside;
+    margin-left: 0px;
+}
+
+#box2 {
+	float:right;
+	position: relative; 
+	width: 75%;
+	height: 100%;
+    background: rgb(7,7,7);/*var-bg-color*/
+}
+
+#analyzing {
+    color: rgb(176,224,230);
+    background-color: rgb(7, 7, 7);
+}
+
+#footnote {
+  position: relative;
+  right: 0px;
+  bottom: -90px;
+  font-size: 0.7em;
+}

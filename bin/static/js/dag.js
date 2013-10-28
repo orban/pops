@@ -3,6 +3,10 @@ d3.json("/static/data/hist_cr.json", function(data) {
     draw(data);
 });
 
+function cleanSVG(){
+    d3.select("svg")
+
+}
 function draw(data) {
     var vertices = data.vertices;
     var edges = data.edges;
@@ -28,6 +32,10 @@ function draw(data) {
     var causalStartingY = height * 1;
     var internalStartingY = height * 1/2;
     var terminalStartingY = height * 0;
+
+    var foci = [{x: causalStartingX, y: causalStartingY}, 
+                {x: internalStartingX, y: internalStartingY}, 
+                {x: terminalStartingX, y: terminalStartingY}];
     
     var causalNodeCharge = 3.0;
     var internalNodeCharge = 1.0;
@@ -81,17 +89,16 @@ function draw(data) {
                 _charge = _charge * terminalNodeCharge;
             };
             return _charge;
-        })  
-        .charge(-200)
-        .gravity(.1)
+        })
+        .gravity(.08)
         .links(edges)
         .linkDistance(function(link) {
-            return link.dist * 1.3;
+            return link.dist * 1.2;
         })
         .linkStrength( function(link, index) {
             return link.strength / 2.0;
         })
-        .alpha(.0001).friction(.5)
+        .alpha(.01).friction(.2)
         .on("tick", tick)
         .start();
 
@@ -115,7 +122,7 @@ function draw(data) {
         });
 
     // vertices
-    var vertex_list = svg.selectAll("rect.vertex").data(vertices).enter().append("rect")
+    var vertex_list = svg.selectAll("rect.vertex").data(force.nodes()).enter().append("rect")
         .attr("class", "vertex")
 	    .attr('width', function(v) {
             var _size;
@@ -237,6 +244,21 @@ function draw(data) {
             .attr("y", function(v) {
                 return v.y - rect_height/2; 
             });
+
+        var k = 30;
+        vertex_list.forEach(function(o, i) {
+            var focus;
+            if (o.type === "causal") {
+                focus = foci[0];
+            } else if (o.type === "internal") {
+                focus = foci[1];
+            } else {
+                focus= foci[2];
+            };
+            o.y += (focus.y - o.y) * k;
+            o.x += (focus.x - o.x) * k;
+        });
+
         edge_list
             .attr("x1", function(e) { 
                 return e.source.x; })

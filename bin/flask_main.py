@@ -49,7 +49,6 @@ def analyze_hist():
         execfile("analyze_history.py", hist_analysis)
         d3_graph_json = hist_analysis['d3_graph_json']
 
-        print d3_graph_json
         #  returning back to the client
         #----------------------------------
         _data = {

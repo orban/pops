@@ -16,7 +16,7 @@
       <!-- Sidebar -->
       <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
-          <li class="sidebar-brand"><a href="#match-up">Pop's Factors</a></li>
+          <li class="sidebar-header"><a href="#match-up">Pop's Factors</a></li>
           <li><a href="#hist">EXPLORE</a></li>
           <li><a href="#match-up">MATCH-UP</a></li>
           <li><a href="#match-up">DETAILS</a></li>
@@ -32,34 +32,36 @@
         </div>
 
         <!--content! -->
-	<div id="row-container" ng-controller="ctrl_feature_selection">
+	    <div id="row-container" ng-controller="ctrl_feature_selection">
 		
-	  <div id="box1">
-		<select multiple id='feature_selection' ng-model="selectedValues" ng-change="selectionsChanged()">
-		</select>
-        <div style="text-align:center;width:90%">
-          <button id="butt_hist" ng-click="submit()">ANALYZE</button>
-        </div>
+	      <div id="box1">
+		    <select multiple id='feature_selection' ng-model="selectedValues" ng-change="selectionsChanged()">
+		    </select>
+            <div style="text-align:center;width:90%">
+              <button id="butt_hist" ng-click="submit()">ANALYZE</button>
+            </div>
 
-	  </div>
+	      </div>
 	  
-	  <div id='box2'>
-		<script src="/static/js/dag.js"></script>
-	  </div>
+	      <div id='box2'>
+            <!-- This is the container for the svg. -->
+	      </div>
 	  
-	  <div id='box1'>
-        <div>
-          <center style="font-size:18px;">SELECTED:</center>
-          <hr>
-          <p id="analyzing"></p>
-		  <!-- {{features_selection_result|json}} -->
-          <div id="selected-features">
-          </div>
-        </div>
-	  </div>
-		
-	</div>
-      
+	      <div id='box1'>
+            <div>
+              <center style="font-size:18px;">SELECTED:</center>
+              <hr>
+              <p id="analyzing"></p>
+              <div id="selected-features">
+              </div>
+            </div>
+	      </div>
+		  
+	    </div> <!-- closing content-wrapper -->
+
+      </div> <!-- closing the content-wrapper -->
+
   </body>
-<script src="/static/js/pops.js"></script>
+  <script src="/static/js/pops.js"></script>
+  <script src="/static/js/dag.js"></script>
 </html>
