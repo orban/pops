@@ -23,14 +23,15 @@ RI.initr()
 # connecting to the PostgreSQL database
 # ----------------------------------------
 try:
-    # # local postgresql database
-    # cnx = psycopg2.connect(host='localhost', database='popsfundamental', 
-    #                        user='jhuang') 
+    # local postgresql database
+    cnx = psycopg2.connect(host='localhost', database='popsfundamental', 
+                           user='jhuang') 
 
-    # remote database
-    cnx = psycopg2.connect(host='54.200.190.191', database='pops',
-                           # password='not_shown_here',                       
-                           user='pops')
+    # # remote database
+    # cnx = psycopg2.connect(host='54.200.190.191', database='pops',
+    #                        # password='not_shown_here',                       
+    #                        user='pops')
+    
     cur = cnx.cursor()
     cnx_exe = cur.execute
 except:
@@ -132,10 +133,13 @@ for i, edge in enumerate(d3_graph_json['edges']):
         d3_graph_json['edges'][i]['dist'] = long_dist
     else:
         d3_graph_json['edges'][i]['dist'] = short_dist    
-    
+
 with open('./static/data/hist_cr.json', 'wb') as f:
     json.dump(d3_graph_json,f)
 
+    
+# --------------
 # testing
+# --------------
 if __name__ == '__main__':
     pass

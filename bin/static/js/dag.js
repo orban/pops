@@ -69,7 +69,7 @@ function draw(data) {
         .attr("markerHeight", markerHeight)
         .attr("orient", "auto")
         .append("svg:path")
-        .attr("d", "M0, 0L25, 0L0, 4")
+        .attr("d", "M0, -5L10, 0L0, 3")
         .attr("fill", function(m) {
             return (m === "posMarker") ? posEdgeColor : negEdgeColor;
         })
@@ -93,10 +93,12 @@ function draw(data) {
         .gravity(.08)
         .links(edges)
         .linkDistance(function(link) {
-            return link.dist * 1.2;
+            _scale = Math.max(1, Math.min(link.strength, 2))
+            return link.dist * _scale;
         })
         .linkStrength( function(link, index) {
-            return link.strength / 2.0;
+            _strength = Math.max(0.4, Math.min(link.strength, 1))
+            return _strength;
         })
         .alpha(.01).friction(.2)
         .on("tick", tick)
@@ -112,6 +114,7 @@ function draw(data) {
         .style("stroke-width", function(e) {
             var _strokeWidth = 1.3;
             _strokeWidth = 0.5 + _strokeWidth * e.strength * 1.8;
+            _strokeWidth = Math.min(5, _strokeWidth);
             return String(_strokeWidth) + "px";
         })
         .style('stroke', function(e){
