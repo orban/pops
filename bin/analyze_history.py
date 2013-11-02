@@ -23,8 +23,14 @@ RI.initr()
 # connecting to the PostgreSQL database
 # ----------------------------------------
 try:
-    cnx = psycopg2.connect(host='localhost', database='popsfundamental', 
-                           user='jhuang')
+    # # local postgresql database
+    # cnx = psycopg2.connect(host='localhost', database='popsfundamental', 
+    #                        user='jhuang') 
+
+    # remote database
+    cnx = psycopg2.connect(host='54.200.190.191', database='pops',
+                           # password='not_shown_here',                       
+                           user='pops')
     cur = cnx.cursor()
     cnx_exe = cur.execute
 except:
@@ -32,14 +38,6 @@ except:
     
 cnx.reset()
 df_games_complete = psql.read_frame('SELECT * FROM df_games_2013;', cnx)
-
-# # ----------
-# # MongoDB
-# # --------- 
-# client = MongoClient('localhost', 27017)
-# client = MongoClient('mongodb://localhost:27017/')
-# db_bbref = client['bbref'] #database bbref
-# mongo_box_score = db_bbref['box_score']
 
 try:
     feature_list

@@ -25,7 +25,6 @@ app = Flask(__name__)
 def home():
     with open('./static/index.html') as f:
         html = f.read()
-    #return render_template('index.html')        
     return html   
 
 @app.route('/index2')
