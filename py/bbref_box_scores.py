@@ -113,6 +113,8 @@ df_links = psql.read_frame('SELECT game, link from results_id_links_2013', cnx)
 counter = 0
 df_counter = 0
 df = pd.DataFrame(columns=['Reserve_F_STL_per',
+ 'team_ORtg',
+ 'team_DRtg',
  'starters_BLK',
  'reserves_DRB_per',
  'Reserve_F_BLK_per',
@@ -730,6 +732,15 @@ Earl Barron	16:15	.621	.667	21.9	30.3	25.4	0.0	3.4	5.0	0.0	17.2	134	95
         away_team_dict['Reserve_'+player_pos+'_BLK_per'] += format_to_float(cells[9].text)
         away_team_dict['Reserve_'+player_pos+'_USG_per'] += format_to_float(cells[11].text)
 
+    # -------------------------------------------
+    # team total
+    # -------------------------------------------
+    div_id = 'div_'+away_team+'_advanced'
+    table = soup_data.find('div', {'id':div_id}).find('tfoot')
+    away_team_dict['team_ORtg'] = format_to_float([r.text for r in table.find_all('td')][12])
+    away_team_dict['team_DRtg'] = format_to_float([r.text for r in table.find_all('td')][13])
+        
+
     # -----------------------
     # calculate starters stats
     # -----------------------
@@ -1269,6 +1280,16 @@ Team Totals	240	.530	.500	46.2	66.7	58.1	61.1	8.0	8.5	18.4	100.0	106.9	95.5
         home_team_dict['Reserve_'+player_pos+'_BLK_per'] += format_to_float(cells[9].text)
         home_team_dict['Reserve_'+player_pos+'_USG_per'] += format_to_float(cells[11].text)
 
+
+    # -------------------------------------------
+    # team total
+    # -------------------------------------------
+    div_id = 'div_'+home_team+'_advanced'
+    table = soup_data.find('div', {'id':div_id}).find('tfoot')
+    home_team_dict['team_ORtg'] = format_to_float([r.text for r in table.find_all('td')][12])
+    home_team_dict['team_DRtg'] = format_to_float([r.text for r in table.find_all('td')][13])
+
+        
     # -----------------------
     # calculate starters stats
     # -----------------------
@@ -1491,7 +1512,7 @@ Team Totals	240	.530	.500	46.2	66.7	58.1	61.1	8.0	8.5	18.4	100.0	106.9	95.5
 
 
 # # putting data into the psql database
-# table_name = 'df_games_2013'
+# table_name = 'df_games_2013_b'
 # cnx_exe('DROP TABLE if EXISTS %s' %table_name)
 # pdpsql.write_frame(df, table_name, cnx)
 

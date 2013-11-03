@@ -38,7 +38,7 @@ except:
     print sys.exc_info()[0]
     
 cnx.reset()
-df_games_complete = psql.read_frame('SELECT * FROM df_games_2013;', cnx)
+df_games_complete = psql.read_frame('SELECT * FROM df_games_2013_b;', cnx)
 
 try:
     feature_list
@@ -57,18 +57,11 @@ except:
 # Data Frame Preparation
 # ======================
 feature_list = [x.lower() for x in feature_list]
-if not('result' in feature_list):
-    feature_list.append('result')
+feature_list.append('team_ortg')
+feature_list.append('team_drtg')
 
 df_games = df_games_complete[feature_list].applymap(float)
-df_games['result'] = df_games['result'].apply(int)
-
-feature_names = df_games[list(set(df_games.columns) - {'result'})].columns.values
-data_X = df_games[list(set(df_games.columns) - {'result'})].values
-data_y = df_games['result'].values
-
 df_CI = df_games[feature_list]
-df_CI['result'] = df_games['result']
 
 # ===================
 # Causal Inference
@@ -120,6 +113,11 @@ for node in node_classification_dict:
 for i in incoming_dict:
     d3_graph_json['vertices'][i]['incoming'] = incoming_dict[i]
     d3_graph_json['vertices'][i]['type'] = node_classification_dict[i]
+
+# set the 'TEAM_ORTG' and 'TEAM_DRTG'     
+# to be terminal nodes
+d3_graph_json['vertices'][-1]['type'] = 'terminal'
+d3_graph_json['vertices'][-2]['type'] = 'terminal'
 
 # edge distances
 long_dist = 500

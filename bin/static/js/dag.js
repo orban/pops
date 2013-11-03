@@ -113,7 +113,7 @@ function draw(data) {
         .attr("class", "edge")
         .style("stroke-width", function(e) {
             var _strokeWidth = 1.3;
-            _strokeWidth = 0.5 + _strokeWidth * e.strength * 1.8;
+            _strokeWidth = 0.2 + _strokeWidth * e.strength * 3.5;
             _strokeWidth = Math.min(5, _strokeWidth);
             return String(_strokeWidth) + "px";
         })
