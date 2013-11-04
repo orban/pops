@@ -36,7 +36,7 @@ cnx.reset()
 client = MongoClient('localhost', 27017)
 client = MongoClient('mongodb://localhost:27017/')
 db_bbref = client['bbref'] #database bbref
-mongo_box_score = db_bbref['box_score'] #collection box_score
+mongo_box_score = db_bbref['box_score_1999_2013']
 
 # ---------------------
 # formatting functions
@@ -109,7 +109,7 @@ def format_to_int(txt):
 # extracting information from the page to 
 # engineer features for each game
 # ----------------------------------------
-df_links = psql.read_frame('SELECT game, link from results_id_links_2013', cnx)
+df_links = psql.read_frame('SELECT game, link from games_id_links_1999_to_2013', cnx)
 counter = 0
 df_counter = 0
 df = pd.DataFrame(columns=['Reserve_F_STL_per',
@@ -369,7 +369,7 @@ df = pd.DataFrame(columns=['Reserve_F_STL_per',
  'result',
  'starters_PTS'])
 
-for i in range(len(df_links)):
+for i in range(len(df_links.head(5))):
     link = df_links.iloc[i,:]['link']
     game = df_links.iloc[i,:]['game']
 
@@ -380,6 +380,8 @@ for i in range(len(df_links)):
     # --------------------------------
     # retrieve the data from MongoDB
     # --------------------------------
+
+    pdb.set_trace()
     data = mongo_box_score.find_one({'link':link})
     print link
     print data['link']
@@ -1512,7 +1514,7 @@ Team Totals	240	.530	.500	46.2	66.7	58.1	61.1	8.0	8.5	18.4	100.0	106.9	95.5
 
 
 # # putting data into the psql database
-# table_name = 'df_games_2013_b'
+# table_name = 'df_games'
 # cnx_exe('DROP TABLE if EXISTS %s' %table_name)
 # pdpsql.write_frame(df, table_name, cnx)
 

@@ -105,7 +105,7 @@ def format_to_float(txt):
     try: 
         return float(txt)
     except:
-        return -1
+        return 1.0
     
 # ---------------------------------------
 
@@ -246,11 +246,41 @@ Career			NBA		1073	1012	36.7	7.9	14.5	.541	0.5	1.9	.266	7.4	12.7	.581	5.9	8.1	.7
     # add data into data frame
     df = df.append(pd.Series(player_dict), ignore_index=True)
 
-# # --------------------------------------
-# # putting data into the psql database
-# # --------------------------------------
-# table_name = 'df_players'
-# cnx.reset();
-# cnx_exe('DROP TABLE if EXISTS %s' %table_name)
-# pdpsql.write_frame(df, table_name, cnx)
+df[_list] = df[_list].applymap(float)    
+df.columns = [u'FT', 
+              u'THREE',
+              u'TOV',
+              u'pos',
+              u'TWO_A',
+              u'FG',
+              u'player_id',
+              u'THREE_A',
+              u'DRB',
+              u'AST',
+              u'TWO_PER',
+              u'PF',
+              u'PTS',
+              u'FGA',
+              u'TWO',
+              u'STL',
+              u'TRB',
+              u'FTA',
+              u'link',
+              u'BLK',
+              u'handle',
+              u'name',
+              u'THREE_PER',
+              u'FG_PER',
+              u'FT_PER',
+              u'MP',
+              u'ORB']
+    
+# --------------------------------------
+# putting data into the psql database
+# --------------------------------------
+
+table_name = 'df_players'
+cnx.reset();
+cnx_exe('DROP TABLE if EXISTS %s' %table_name)
+pdpsql.write_frame(df, table_name, cnx)
 
