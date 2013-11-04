@@ -23,18 +23,23 @@ import utils.pandas_psql as pdpsql
 team = 'LAC'
 opp = 'LAL'
 
-
 # # ------------------------------------------
 # # connecting to the PostgreSQL database
 # # ------------------------------------------
-# try:
-#     cnx = psycopg2.connect(host='localhost', database='popsfundamental', 
-#                            user='jhuang')
-#     cur = cnx.cursor()
-#     cnx_exe = cur.execute
-# except:
-#     print sys.exc_info()[0]
-# cnx.reset()
+try:
+    # cnx = psycopg2.connect(host='localhost', database='popsfundamental', 
+    #                        user='jhuang')
+
+    # remote database
+    cnx = psycopg2.connect(host='54.200.190.191', database='pops',
+                           # password='not_shown_here',                       
+                           user='pops')    
+    cur = cnx.cursor()
+    cnx_exe = cur.execute
+except:
+    print sys.exc_info()[0]
+cnx.reset()
+
 
 # # ------------------------------------------
 # # MongoDB
@@ -110,7 +115,10 @@ def team_stat_line(team, opp=False):
     for i in range(roster.shape[0]):
         player_id = roster['id'][i]
 
-        query = "SELECT * FROM df_players WHERE player_id='%s';" % player_id
+        # this line has some issues
+		# ####
+        query = "SELECT * FROM players_bbref WHERE player_bbr_id='%s';" % player_id
+		# ######
         player_stat_line = psql.read_frame(query, cnx)
 
         try:
@@ -120,7 +128,7 @@ def team_stat_line(team, opp=False):
             pass
             # print '-'*20
             # print team
-            # print 'This player--'+player_id+'--does not have proper stats in record.'
+            # print player_id + '--does not have proper stats in record.'
             # print '-'*20            
 
     for pos in ['G', 'F', 'C']:
@@ -136,6 +144,7 @@ def team_stat_line(team, opp=False):
             stat_line[pos+'_'+_stat+suffix] = sum(_df[_stat] / total_mp) * 48 * pos_factor
             stat_line[_stat+suffix] += sum(_df[_stat] / total_mp) * 48 * pos_factor
 
+    pdb.set_trace()
     return stat_line
 
 # # testing
@@ -167,25 +176,25 @@ obs = dict(stat_line.items() + stat_line_opp.items())
 #                              ignore_index=True)
 # # ------------------------------------------------------------ 
 
-game_id_dict = {x:i for i,x in enumerate(df_teams['tag'])}
-id_game_dict = {i:x for i,x in enumerate(df_teams['tag'])}
+# game_id_dict = {x:i for i,x in enumerate(df_teams['tag'])}
+# id_game_dict = {i:x for i,x in enumerate(df_teams['tag'])}
 
-from sklearn import preprocessing
-from sklearn.metrics.pairwise import euclidean_distances as R2_dist
+# from sklearn import preprocessing
+# from sklearn.metrics.pairwise import euclidean_distances as R2_dist
 
-scaler = preprocessing.StandardScaler().fit(df_game.values)
+# scaler = preprocessing.StandardScaler().fit(df_game.values)
 
-arr_game = scaler.transform(df_game.values)
-arr_obs = scaler.transform(obs.values())
+# arr_game = scaler.transform(df_game.values)
+# arr_obs = scaler.transform(obs.values())
 
-_rank = R2_dist(arr_game, arr_obs)
-_range = np.arange(0,len(_rank)).reshape(_rank.shape)
-df_rank = pd.DataFrame(np.hstack((_rank,_range)), 
-                       columns=['rank', 'id'])
-df_rank = df_rank.sort('rank')
+# _rank = R2_dist(arr_game, arr_obs)
+# _range = np.arange(0,len(_rank)).reshape(_rank.shape)
+# df_rank = pd.DataFrame(np.hstack((_rank,_range)), 
+#                        columns=['rank', 'id'])
+# df_rank = df_rank.sort('rank')
 
-_chosen_list = df_rank['id'][0:5]
-id_game_dict[_chosen_list]
+# _chosen_list = df_rank['id'][0:5]
+# id_game_dict[_chosen_list]
 
 
 # generating games
