@@ -8617,8 +8617,24 @@ $.extend(Datepicker.prototype, {
             // ===================================
             // this is where the updates happen
             // ===================================
-            console.log($('#datepicker').val());
+            var _chosen_date;
+            var _games;
+            var _html = '';
 
+            _chosen_date = $('#datepicker').val();
+            _games = schedule_2014[_chosen_date];
+            console.log(_games);
+            
+            $("#disp-game").html(_html);
+            for (var i in _games){
+                var _game;
+
+                _game = _games[i];
+                _html = _html + '<li>' + _game + '</li>';
+                
+            };
+            _html = '<ol>' + _html + '</ol>';
+            $("#disp-game").html(_html);
 	},
 
 	/* Update any alternate field to synchronise with the main field. */
