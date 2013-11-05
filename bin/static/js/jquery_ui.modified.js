@@ -8624,17 +8624,28 @@ $.extend(Datepicker.prototype, {
             _chosen_date = $('#datepicker').val();
             _games = schedule_2014[_chosen_date];
             console.log(_games);
-            
-            $("#disp-game").html(_html);
-            for (var i in _games){
-                var _game;
 
-                _game = _games[i];
-                _html = _html + '<li>' + _game + '</li>';
-                
-            };
-            _html = '<ol>' + _html + '</ol>';
-            $("#disp-game").html(_html);
+            $("#div-disp-game").html(_html);
+            
+
+	    for(var k in _games) {
+                var _game = _games[k];
+                var j = 0;
+                j = parseInt(k) + 1;
+		_html += "<option value='"+k +"'>"+ String(j) + ". "+_game + "</option>";
+	    };
+
+            // for (var i in _games){
+                // var _game = _games[i];
+	    //     _html += "<option value=" + k  + "ng-selected='features_selection_result." 
+	    //     		 + k + "'>" +features_dict[k] + "</option>"                
+            // };
+            // _html = '<ol>' + _html + '</ol>';
+
+            _html = '<select id="disp-game" size="15" ng-model="selectedValues" ng-change="selectionsChanged()">'
+                + _html + '</select>';
+
+            $("#div-disp-game").html(_html);
 	},
 
 	/* Update any alternate field to synchronise with the main field. */

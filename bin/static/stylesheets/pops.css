@@ -179,3 +179,9 @@ body {
     height: 1100px;
     font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
 }
+
+#disp-game {
+    margin: 20px;
+    width: 350px;
+    height: 200px;
+}
