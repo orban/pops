@@ -27,9 +27,9 @@ def home():
         html = f.read()
     return html   
 
-@app.route('/match-up')
+@app.route('/matchup')
 def match_up():
-    with open('./static/match-up.html') as f:
+    with open('./static/matchup.html') as f:
         html = f.read()
     return html   
 

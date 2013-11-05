@@ -1,0 +1,112 @@
+home team is:  UTA
+aways team is:  DEN
+date is:  20070411
+++++++++++++++++++++++++++++++++++++++++++
+processing the away team entry
+++++++++++++++++++++++++++++++++++++++++++
+game id is :  20070411_DEN
+the team is :  DEN
+
+
+++++++++++++++++++++++++++++++++++++++++++
+processing the home team entry
+++++++++++++++++++++++++++++++++++++++++++
+game id is :  20070411_UTA
+the team is :  UTA
+
+
+9998
+/boxscores/200703020DEN.html
+/boxscores/200703020DEN.html
+------------------------------
+home team is:  DEN
+aways team is:  HOU
+date is:  20070302
+++++++++++++++++++++++++++++++++++++++++++
+processing the away team entry
+++++++++++++++++++++++++++++++++++++++++++
+game id is :  20070302_HOU
+the team is :  HOU
+
+
+++++++++++++++++++++++++++++++++++++++++++
+processing the home team entry
+++++++++++++++++++++++++++++++++++++++++++
+game id is :  20070302_DEN
+the team is :  DEN
+------------------------------
+9999
+/boxscores/200703020LAL.html
+/boxscores/200703020LAL.html
+------------------------------
+home team is:  LAL
+aways team is:  SAC
+date is:  20070302
+++++++++++++++++++++++++++++++++++++++++++
+processing the away team entry
+++++++++++++++++++++++++++++++++++++++++++
+game id is :  20070302_SAC
+the team is :  SAC
+
+
+++++++++++++++++++++++++++++++++++++++++++
+processing the home team entry
+++++++++++++++++++++++++++++++++++++++++++
+game id is :  20070302_LAL
+the team is :  LAL
+------------------------------
+10000
+/boxscores/200703020MIA.html
+/boxscores/200703020MIA.html
+------------------------------
+home team is:  MIA
+aways team is:  DET
+date is:  20070302
+++++++++++++++++++++++++++++++++++++++++++
+processing the away team entry
+++++++++++++++++++++++++++++++++++++++++++
+game id is :  20070302_DET
+the team is :  DET
+
+
+++++++++++++++++++++++++++++++++++++++++++
+processing the home team entry
+++++++++++++++++++++++++++++++++++++++++++
+game id is :  20070302_MIA
+the team is :  MIA
+------------------------------
+10001
+/boxscores/200703020MIN.html
+/boxscores/200703020MIN.html
+------------------------------
+home team is:  MIN
+aways team is:  UTA
+date is:  20070302
+++++++++++++++++++++++++++++++++++++++++++
+processing the away team entry
+++++++++++++++++++++++++++++++++++++++++++
+game id is :  20070302_UTA
+the team is :  UTA
+
+
+++++++++++++++++++++++++++++++++++++++++++
+processing the home team entry
+++++++++++++++++++++++++++++++++++++++++++
+game id is :  20070302_MIN
+the team is :  MIN
+------------------------------
+10002
+/boxscores/200703020NYK.html
+/boxscores/200703020NYK.html
+------------------------------
+home team is:  NYK
+aways team is:  GSW
+date is:  20070302
+++++++++++++++++++++++++++++++++++++++++++
+processing the away team entry
+++++++++++++++++++++++++++++++++++++++++++
+game id is :  20070302_GSW
+the team is :  GSW
+
+with open("wip/df_games_1999_2013_halfway_copy.pkl", "wb") as f:
+     pickle.dump(df,f)

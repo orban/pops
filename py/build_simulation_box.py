@@ -607,7 +607,8 @@ df = pd.DataFrame(columns=['starters_TRB_home',
  'Starting_C_BLK_home',
  'Reserve_G_FT_home'])
 
-for i in range(len(df_links)):
+for j in range(4001):#len(df_links.tail(3999))):
+    i = j + 13498
     link = df_links.iloc[i,:]['link']
     game = df_links.iloc[i,:]['game_id']
 
