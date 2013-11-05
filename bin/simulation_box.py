@@ -222,10 +222,8 @@ def simulating_game(obs, df_game):
     '''
     Input is a stat line, see the output of make_stat_line
 
-
     Output is a data frame that use that stat_line keys as columns.
     Each row is a record of a game.
-
     '''
     RETAINED_PER = 0.01
     
@@ -244,16 +242,16 @@ def simulating_game(obs, df_game):
     _chosen_list = map(int, df_rank['id'][0:cut_off].tolist())
     df = df_game.iloc[_chosen_list,:]
 
-    return df
+    return _chosen_list
 
-# test
-# =======================================
-# INPUTS
-# =======================================
-match_up_input = {'home': 'LAC',
-                  'away': 'LAL'}
 
-df_simulated_game = simulating_game(make_stat_line(match_up_input), 
-									df_game)
+#   test
+# -----------
+if __name__ == '__main__':
+	match_up_input = {'home': 'LAC',
+					  'away': 'LAL'}
+	
+	df_simulated_game = simulating_game(make_stat_line(match_up_input), 
+										df_game)
 
 

@@ -1,4 +1,4 @@
-var app = angular.module('pops', []);
+var hist = angular.module('hist', []);
 
 var features_dict; 
 var features_selection = {};
@@ -17,24 +17,23 @@ $(document).ajaxComplete(function() {
 	document.getElementById("feature_selection").innerHTML = _html;
 });
 
-//control for the selection box and the submit button
-app.controller('ctrl_feature_selection', function($scope, $http) {
-	$(document).ajaxComplete(function() {
-
+//app for the EXPLORE tab
+hist.controller('ctrl_feature_selection', function($scope, $http) {
+    $(document).ajaxComplete(function() {
         //selection box
-		$scope.selectionsChanged = function(){
-			var _selected = [];
+	$scope.selectionsChanged = function(){
+	    var _selected = [];
             var _html = '';
-
-			for (var i in $scope.selectedValues){
-				_selected.push(parseInt(/^[0-9]+/g.exec($scope.selectedValues[i])));
-			};
-			$scope.selection_result = [];	
-			for(var i in features_dict) {
-       			if (-1 != $.inArray(parseInt(i), _selected)) {
-					$scope.selection_result.push(features_dict[i]);						
-				};
-			};
+            
+	    for (var i in $scope.selectedValues){
+		_selected.push(parseInt(/^[0-9]+/g.exec($scope.selectedValues[i])));
+	    };
+	    $scope.selection_result = [];	
+	    for(var i in features_dict) {
+       		if (-1 != $.inArray(parseInt(i), _selected)) {
+		    $scope.selection_result.push(features_dict[i]);						
+		};
+	    };
             
             $("#selected-features").html('');
             for (var i in $scope.selection_result){
@@ -43,21 +42,21 @@ app.controller('ctrl_feature_selection', function($scope, $http) {
             };
             _html = '<ol>' + _html + '</ol>';
             _html = 
-            $("#selected-features").html(_html);
-		};
+                $("#selected-features").html(_html);
+	};
 
         //submit for analysis
         $scope.submit = function(){
-			var _selected = [];
-			for (var i in $scope.selectedValues){
-				_selected.push(parseInt(/^[0-9]+/g.exec($scope.selectedValues[i])));
-			};
-			var feature_list = [];
-			for(var i in features_dict) {
-       			if (-1 != $.inArray(parseInt(i), _selected)) {
-					feature_list.push(features_dict[i]);						
-				};
-			};
+	    var _selected = [];
+	    for (var i in $scope.selectedValues){
+		_selected.push(parseInt(/^[0-9]+/g.exec($scope.selectedValues[i])));
+	    };
+	    var feature_list = [];
+	    for(var i in features_dict) {
+       		if (-1 != $.inArray(parseInt(i), _selected)) {
+		    feature_list.push(features_dict[i]);						
+		};
+	    };
             var _route = "/analyze_hist";
             var _json = JSON.stringify(feature_list);
 
@@ -78,7 +77,5 @@ app.controller('ctrl_feature_selection', function($scope, $http) {
                     draw(data);
                 }});
         };				
-	});	
+    });	
 });
-
-

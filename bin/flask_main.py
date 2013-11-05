@@ -27,6 +27,12 @@ def home():
         html = f.read()
     return html   
 
+@app.route('/match-up')
+def match_up():
+    with open('./static/match-up.html') as f:
+        html = f.read()
+    return html   
+
 @app.route('/index2')
 def testing():
     with open('./static/index2.html') as f:
@@ -36,6 +42,31 @@ def testing():
 
 @app.route("/analyze_hist", methods=['POST'])
 def analyze_hist():
+    if request.method == 'POST':
+        #   receiving the post
+        #------------------------
+        feature_list = json.loads(request.form['data'])
+        features_txt = unicode(','.join(feature_list))
+
+        #   processing
+        #------------------
+        hist_analysis = {'feature_list': feature_list}
+        execfile("analyze_history.py", hist_analysis)
+        d3_graph_json = hist_analysis['d3_graph_json']
+
+        #  returning back to the client
+        #----------------------------------
+        _data = {
+            'input'  : request.form,
+            'output' : d3_graph_json
+        }
+        _json = json.dumps(_data)
+        return Response(_json, status=200, mimetype='application/json')
+    else:
+        return "Error: are you posting?"
+
+@app.route("/match_up", methods=['POST'])
+def analyze_match_up():
     if request.method == 'POST':
         #   receiving the post
         #------------------------

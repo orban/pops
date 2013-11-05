@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Pop's Winning Factors</title>
+    <link rel="icon" href="/static/images/logo2.png" />
+    <link rel="stylesheet" href="/static/stylesheets/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/stylesheets/pops.css"/>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
+
+    <script src="/static/js/jquery-1.9.1.js"></script>
+    <script src="/static/js/jquery_ui.modified.js"></script>
+
+    <script src="/static/js/angular.min.js"></script>
+
+    <script src="/static/js/d3.v3.min.js"></script>
+
+  </head>
+  <!-- ========================== -->
+  <body>
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-header"><a href="">Pop's Factors</a></li>
+          <li><a href="/">EXPLORE</a></li>
+          <li><a href="/match-up">MATCH-UPS</a></li>
+          <li><a href="">DETAILS</a></li>
+          <li><a href="">ABOUT</a></li>
+        </ul>
+      </div>
+          
+      <!-- page content -->
+      <div id="content-wrapper-matchup" ng-app="matchup">
+
+        <div id="content-header-matchup">
+          <center>Exploring Matchups</center>
+        </div>
+  
+        <!--content! -->
+        <div id="content-container-matchup" ng-controller="ctrl_choose_matchup">
+
+ 
+          
+          <p align="center">Date:
+            <input type="text" id="datepicker" ng-model="text"/>
+          </p>
+
+          <h1 align="center">
+            {{text}}
+          </h1>
+          
+        
+        </div> <!-- closing the content div -->
+        
+      </div>
+  </body>
+  <script src="/static/js/matchup.js"></script>
+  <!-- <script src="/static/js/dag.js"></script> -->
+</html>
