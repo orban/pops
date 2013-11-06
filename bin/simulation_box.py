@@ -16,8 +16,17 @@ from bson.objectid import ObjectId
 from bs4 import BeautifulSoup as Soup
 import psycopg2
 
+'''
+This file contains two methods:
+1. team_stat_line()
+2. simulating_games()
+'''
 
-def team_stat_line(team, home=True):
+def team_stat_line(team, home=True, cnx=None):
+
+    if not(cnx):
+        print 'The function team_stat_line needs a PostgreSQL connection'
+        raise
     
     # team roster dict
     with open('app_data/team_roster_dict.pkl', 'rb') as f:
@@ -107,137 +116,22 @@ def team_stat_line(team, home=True):
 # obs = dict(stat_line_home.items() + stat_line_away.items())
 # pdb.set_trace()
 
-def make_stat_line(game_dict):
+def make_stat_line(game_dict, cnx=None):
     '''
     An example of the argument:
     
         {'home': 'LAC',
         'away': 'LAL'}
 
-    Output should be a dictionary that has 120 keys:
-[u'ast_C_away',
- u'ast_C_home',
- u'ast_F_away',
- u'ast_F_home',
- u'ast_G_away',
- u'ast_G_home',
- u'ast_away',
- u'ast_home',
- u'blk_C_away',
- u'blk_C_home',
- u'blk_F_away',
- u'blk_F_home',
- u'blk_G_away',
- u'blk_G_home',
- u'blk_away',
- u'blk_home',
- u'drb_C_away',
- u'drb_C_home',
- u'drb_F_away',
- u'drb_F_home',
- u'drb_G_away',
- u'drb_G_home',
- u'drb_away',
- u'drb_home',
- u'fg_C_away',
- u'fg_C_home',
- u'fg_F_away',
- u'fg_F_home',
- u'fg_G_away',
- u'fg_G_home',
- u'fg_away',
- u'fg_home',
- u'fga_C_away',
- u'fga_C_home',
- u'fga_F_away',
- u'fga_F_home',
- u'fga_G_away',
- u'fga_G_home',
- u'fga_away',
- u'fga_home',
- u'ft_C_away',
- u'ft_C_home',
- u'ft_F_away',
- u'ft_F_home',
- u'ft_G_away',
- u'ft_G_home',
- u'ft_away',
- u'ft_home',
- u'fta_C_away',
- u'fta_C_home',
- u'fta_F_away',
- u'fta_F_home',
- u'fta_G_away',
- u'fta_G_home',
- u'fta_away',
- u'fta_home',
- u'orb_C_away',
- u'orb_C_home',
- u'orb_F_away',
- u'orb_F_home',
- u'orb_G_away',
- u'orb_G_home',
- u'orb_away',
- u'orb_home',
- u'pf_C_away',
- u'pf_C_home',
- u'pf_F_away',
- u'pf_F_home',
- u'pf_G_away',
- u'pf_G_home',
- u'pf_away',
- u'pf_home',
- u'pts_C_away',
- u'pts_C_home',
- u'pts_F_away',
- u'pts_F_home',
- u'pts_G_away',
- u'pts_G_home',
- u'pts_away',
- u'pts_home',
- u'stl_C_away',
- u'stl_C_home',
- u'stl_F_away',
- u'stl_F_home',
- u'stl_G_away',
- u'stl_G_home',
- u'stl_away',
- u'stl_home',
- u'three_C_away',
- u'three_C_home',
- u'three_F_away',
- u'three_F_home',
- u'three_G_away',
- u'three_G_home',
- u'three_a_C_away',
- u'three_a_C_home',
- u'three_a_F_away',
- u'three_a_F_home',
- u'three_a_G_away',
- u'three_a_G_home',
- u'three_a_away',
- u'three_a_home',
- u'three_away',
- u'three_home',
- u'tov_C_away',
- u'tov_C_home',
- u'tov_F_away',
- u'tov_F_home',
- u'tov_G_away',
- u'tov_G_home',
- u'tov_away',
- u'tov_home',
- u'trb_C_away',
- u'trb_C_home',
- u'trb_F_away',
- u'trb_F_home',
- u'trb_G_away',
- u'trb_G_home',
- u'trb_away',
- u'trb_home']
+    Output should be a dictionary that has 120 keys.
+
     '''
-    stat_line_home = team_stat_line(game_dict['home'], home=True)
-    stat_line_away = team_stat_line(game_dict['away'], home=False)
+    if not(cnx):
+        print 'The function make_stat_line needs a PostgreSQL connection'
+        raise
+    
+    stat_line_home = team_stat_line(game_dict['home'], home=True, cnx=cnx)
+    stat_line_away = team_stat_line(game_dict['away'], home=False, cnx=cnx)
     _obs = dict(stat_line_home.items() + stat_line_away.items())
     
     return _obs
@@ -247,21 +141,7 @@ def make_stat_line(game_dict):
 # print make_stat_line({'home': 'HOU','away': 'MIA'})
 # pdb.set_trace()
 
-# # ------------------------------------------------------------ 
-# # # making a fake dataset
-# obs = make_stat_line(match_up_input)
-
-# df_teams = pd.read_csv('app_data/bbref_team_names_2014.txt')
-# column_name = obs.keys()
-# df_game = pd.DataFrame(columns = column_name)
-
-# for i in range(1000):
-#   _obs = make_stat_line(match_up_input)
-#   df_game = df_game.append(pd.Series(_obs),
-#                            ignore_index = True)
-# # ------------------------------------------------------------ 
-
-def simulating_games(obs):
+def simulating_games(obs, cnx=None):
     '''
     Input is an observation, see the output of make_stat_line.
 
@@ -282,8 +162,13 @@ def simulating_games(obs):
     
     Each row is a record of an simulated game.
     '''
+    
+    if not(cnx):
+        print 'The function simulating_games needs a PostgreSQL connection'
+        raise
+
     RETAINED_PER = 0.05
-    query = "SELECT * FROM df_simulator"
+    query = "SELECT * FROM df_simulator limit 1000;"
     df_simulator = psql.read_frame(query, cnx)
 
     text_fields = ['result_home', 'result_away',
@@ -374,12 +259,26 @@ def simulating_games(obs):
 
     return df
 
-#   test
-# -----------
+#   testing
+# -------------
 if __name__ == '__main__':
+
+    try:
+        # local postgresql database
+        cnx = psycopg2.connect(host='localhost', database='popsfundamental', 
+                               user='jhuang') 
+
+        # # remote database
+        # cnx = psycopg2.connect(host='54.200.190.191', database='pops',
+        #                        # password='not_shown_here',                       
+        #                        user='pops')
+    
+    except:
+        print sys.exc_info()[0]
+    
     matchup_input = {'home': 'LAC',
                       'away': 'LAL'}
-    obs = make_stat_line(matchup_input)
+    obs = make_stat_line(matchup_input, home=True, cnx=cnx)
     # ------
-    df = simulating_games(obs)
+    df = simulating_games(obs, cnx)
     

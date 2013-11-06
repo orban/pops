@@ -17,10 +17,13 @@ RI.initr()
 # personal utilities
 import utils.pandas_psql as pdpsql
 
-
-# ----------------------------------------
+# ------------------------------------------
 # setting up the computation environment
-# ----------------------------------------
+# -------------------------------------------
+
+# the postgres database connection is made
+# global to avoid confusion when we
+# switch location
 try:
     # local postgresql database
     cnx = psycopg2.connect(host='localhost', database='popsfundamental', 
@@ -35,8 +38,6 @@ try:
     cnx_exe = cur.execute
 except:
     print sys.exc_info()[0]
-
-pdb.set_trace()
 
 import simulation_box as sb
 import feature_selection as fs	
@@ -53,73 +54,61 @@ try:
 except:
 	import feature_selection as fs		
 
-# ------------------------------------------------------    
+#  inputs    
+try:
+    matchup_input
+except:
+	matchup_input = {'home': 'LAC',
+					  'away': 'LAL'}
+print '--analyzing matchup --: ', matchup_input	
 
 try:
-    match_up_input
+    where
 except:
-	match_up_input = {'home': 'LAC',
-					  'away': 'LAL'}
-	
-# read in the historical games
-feature_list = [u'fg',
-				u'fga',
-				u'two',
-				u'two_a',
-				u'three',
-				u'three_a',
-				u'ft',
-				u'fta',
-				u'pts',
-				u'ast',
-				u'tov',
-				u'stl',
-				u'blk',
-				u'orb',
-				u'drb',
-				u'trb',
-				u'pf']
+    where = 'home'
 
-# # ------------------------------------------------------------ 
-# # making fake data
-# obs = simulation_box.make_stat_line(match_up_input)
+# generating the data set
+obs = sb.make_stat_line(matchup_input, cnx)
+df_simulator = sb.simulating_games(obs, cnx)
 
-# df_teams = pd.read_csv('app_data/bbref_team_names_2014.txt')
-# column_name = obs.keys()
-# df_game = pd.DataFrame(columns = column_name)
+if where == 'home':
+    _result = df_simulator['team_pts_home'] > df_simulator['team_pts_away']
+    df_simulator['result'] = _result.apply(lambda x: 1 if x else 0)
+elif where == 'away':
+    _result = df_simulator['team_pts_home'] < df_simulator['team_pts_away']
+    df_simulator['result'] = _result.apply(lambda x: 1 if x else 0)
+else:
+    print "The where variable is not set properly"
+    raise
 
-# for i in range(1000):
-#   _obs = simulation_box.make_stat_line(match_up_input)
-#   df_game = df_game.append(pd.Series(_obs),
-#                            ignore_index = True)
-# # ------------------------------------------------------------ 
-
-feature_list = [k+'_home' for k in feature_list]
-
-df_game_1999_2013_for_simulation = df_game.copy() ####
-df_game_1999_2013 = df_game.copy() ####
-df_game_1999_2013['result'] = [random.random() for x in range(1000)]
-
-df_simulator 
+# - Features to be analyzed
+# - See the columns of df_simulator for
+#   what is available
+FEATURE_LIST = [x+'_'+where for x in 
+                ['fg', 'fga',
+                 'three', 'three_a',
+                 'ft', 'fta',
+                 'pts', 'ast', 'tov', 'stl', 'blk',
+                 'orb', 'drb', 'trb', 'pf',
+                 'team_ortg', 'team_drtg']]
 
 # ======================
 # Data Frame Preparation
 # ======================
-game_list = sb.simulating_game(sb.make_stat_line(match_up_input), 
-								 df_game_1999_2013_for_simulation)
-df_match_up = df_game_1999_2013.iloc[game_list,:][feature_list]
-df_match_up['result'] = df_game_1999_2013.iloc[game_list,:]['result']
 
-data_X = df_match_up[feature_list].values
-data_y = df_match_up['result'].values
+data_X = df_simulator[FEATURE_LIST].values
+data_y = df_simulator['result'].values
 
 # ===================
 # Feature Selections
 # ===================
 
-top_features = fs.top_features(data_X, data_y, feature_list, num_feature=10)
+_num = 7 if where == 'home' else 5
+
+top_features = fs.top_features(data_X, data_y, FEATURE_LIST, num_feature=_num)
 top_features.append('result')
-df_CI = df_match_up[top_features].applymap(float)
+df_CI = df_simulator[top_features].applymap(float)
+
 
 # ===================
 # Causal Inference
@@ -128,7 +117,7 @@ df_CI = df_match_up[top_features].applymap(float)
 # passing data into R
 df_CI.to_csv('./app_data/df_matchup_CI_R.csv', header=True, index=False)
 
-with open('analyze_match_up.r', 'rb') as f:
+with open('analyze_matchup.r', 'rb') as f:
     r_script = f.read()
         
 # run R
@@ -189,8 +178,8 @@ for i, edge in enumerate(d3_graph_json['edges']):
     else:
         d3_graph_json['edges'][i]['dist'] = short_dist    
 
-with open('./static/data/match_up_cr.json', 'wb') as f:
-    json.dump(d3_graph_json,f)
+# with open('./static/data/matchup_cr.json', 'wb') as f:
+#     json.dump(d3_graph_json,f)
 
 # --------------
 # testing

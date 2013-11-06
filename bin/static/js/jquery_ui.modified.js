@@ -8615,7 +8615,9 @@ $.extend(Datepicker.prototype, {
 		}
             
         // ===================================
-        // this is where the updates happen
+        // This is where the updating happen.
+        // The following codes are executed when
+        // a date is chosen.
         // ===================================
         var _chosen_date;
         var _games;

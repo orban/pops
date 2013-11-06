@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="/static/stylesheets/datepicker.css"/>
 
     <script src="/static/js/jquery-1.9.1.js"></script>
-    <script src="/static/js/jquery_ui.modified.js"></script>
-
     <script src="/static/js/angular.min.js"></script>
-
     <script src="/static/js/d3.v3.min.js"></script>
+
+    <script src="/static/js/jquery_ui.modified.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.6.0.js"></script>
 
   </head>
   <!-- ========================== -->
@@ -55,10 +55,18 @@
             <p  id='status'></p>
           </div>
 
-
+	      <div id='svg-matchup'>
+            <!-- This is the container for the svg. -->
+	      </div>
 
           
-        
+          <div ng-controller="tabCtrl">
+            <tabset>
+              <tab heading="home" select="showHome()"></tab>
+              <tab heading="away" select="showVisitor()"></tab>
+            </tabset>
+          </div>
+
         </div> <!-- closing the content div -->
         
       </div>

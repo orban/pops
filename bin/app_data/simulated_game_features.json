@@ -10,9 +10,11 @@
     "team_FT_per",    
     "team_FTA",
     "reserves_USG_per",  
+	"team_ORtg",  
+	"team_DRtg",  		
     
     "Pace",
-    "ORtg",        
+    "ORtg",      
     "eFG_per",
     "TOV_per",
     "ORB_per",

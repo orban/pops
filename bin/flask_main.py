@@ -82,24 +82,42 @@ def analyze_matchup():
         home = team_name_dict[_home]
         away = team_name_dict[_away]        
         
-        match_up_input = {'home': home,
+        matchup_input = {'home': home,
                           'away': away}
 
-        pdb.set_trace()
         #   processing
         #------------------
-        # hist_analysis = {'feature_list': feature_list}
-        # execfile("analyze_history.py", hist_analysis)
-        # d3_graph_json = hist_analysis['d3_graph_json']
 
+        # for home team
+
+        for where in ['home', 'away']:
+            matchup_analysis = {'matchup_input': matchup_input,
+                                'where': where}
+            execfile("analyze_matchup.py", matchup_analysis)
+            if where == 'home':
+                d3_graph_json_home = matchup_analysis['d3_graph_json']
+            else: 
+                d3_graph_json_away = matchup_analysis['d3_graph_json']                
+            
+            print [v['name'] for v in vars()['d3_graph_json_'+where]['vertices']]
+        
+        # # for away team        
+        # matchup_analysis = {'matchup_input': matchup_input,
+        #                     'where': 'away'}
+        # execfile("analyze_matchup.py", matchup_analysis)
+        # d3_graph_json_away = matchup_analysis['d3_graph_json']
+        # print [v.name for v in d3_graph_json_home['vertices']]        
+        
         #  returning back to the client
         #----------------------------------
         _data = {
             'input'  : request.form,
-            'output' : str(teams) #d3_graph_json
+            'data_home' : d3_graph_json_home,
+            'data_visitor' : d3_graph_json_away
         }
         _json = json.dumps(_data)
         return Response(_json, status=200, mimetype='application/json')
+    
     else:
         return "Error: are you posting?"
 
