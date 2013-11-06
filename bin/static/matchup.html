@@ -40,14 +40,23 @@
         <!--content! -->
         <div id="content-container-matchup" ng-controller="ctrl_choose_matchup">
 
- 
-          
-          <p align="center">Date:
+           <p align="center">Date:
             <input type="text" id="datepicker" ng-model="text"/>
           </p>
           
           <div id="div-disp-game">
+            <select id="disp-game" size="15" ng-model="selectedValues"
+                    ng-change="selectionsChanged()">
+            </select>
           </div>
+
+          <div id="div-butt-pop" style="text-align:center;width:90%">
+            <button id="butt-pop" ng-click="submit()">POP</button>
+            <p  id='status'></p>
+          </div>
+
+
+
           
         
         </div> <!-- closing the content div -->

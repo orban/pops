@@ -1,15 +1,12 @@
 #!/usr/bin/env python
 import os, sys, time, re, json, pdb, random, datetime, subprocess
 from sys import modules
-# -----------------------------------
+# third parties
 import numpy as np
 import pandas as pd
 import pandas.io.sql as psql
 from scipy import stats
-# from bson.objectid import ObjectId
-# from pymongo import MongoClient
 import psycopg2
-
 # R interface
 import rpy2.robjects as robjects
 import rpy2.rinterface as RI
@@ -17,9 +14,32 @@ import warnings
 warnings.filterwarnings('ignore')
 R = robjects.r
 RI.initr()
-
-# -----------------------------------
+# personal utilities
 import utils.pandas_psql as pdpsql
+
+
+# ----------------------------------------
+# setting up the computation environment
+# ----------------------------------------
+try:
+    # local postgresql database
+    cnx = psycopg2.connect(host='localhost', database='popsfundamental', 
+                           user='jhuang') 
+
+    # # remote database
+    # cnx = psycopg2.connect(host='54.200.190.191', database='pops',
+    #                        # password='not_shown_here',                       
+    #                        user='pops')
+    
+    cur = cnx.cursor()
+    cnx_exe = cur.execute
+except:
+    print sys.exc_info()[0]
+
+pdb.set_trace()
+
+import simulation_box as sb
+import feature_selection as fs	
 
 # deleting existing modules for testing
 try:
@@ -33,26 +53,7 @@ try:
 except:
 	import feature_selection as fs		
 
-# ----------------------------------------
-# connecting to the PostgreSQL database
-# ----------------------------------------
-# try:
-#     # # local postgresql database
-#     # cnx = psycopg2.connect(host='localhost', database='popsfundamental', 
-#     #                        user='jhuang') 
-
-#     # # remote database
-#     # cnx = psycopg2.connect(host='54.200.190.191', database='pops',
-#     #                        # password='not_shown_here',                       
-#     #                        user='pops')
-    
-#     cur = cnx.cursor()
-#     cnx_exe = cur.execute
-# except:
-#     print sys.exc_info()[0]
-    
-# cnx.reset()
-# df_games_complete = psql.read_frame('SELECT * FROM df_games_2013_b;', cnx)
+# ------------------------------------------------------    
 
 try:
     match_up_input
@@ -93,13 +94,13 @@ feature_list = [u'fg',
 #                            ignore_index = True)
 # # ------------------------------------------------------------ 
 
-
-
 feature_list = [k+'_home' for k in feature_list]
 
 df_game_1999_2013_for_simulation = df_game.copy() ####
 df_game_1999_2013 = df_game.copy() ####
 df_game_1999_2013['result'] = [random.random() for x in range(1000)]
+
+df_simulator 
 
 # ======================
 # Data Frame Preparation
