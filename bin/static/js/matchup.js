@@ -4,7 +4,7 @@
 //app for the MATCHUPS tab
 var matchup_app = function() {
 
-    var matchup = angular.module('matchup', ['ui.bootstrap']);
+    var matchup = angular.module('matchup', ['$strap.directives']);//['ui.bootstrap','$strap.directives']);
 
     matchup.controller('ctrl_choose_matchup', function($scope, $http) {
 
@@ -57,16 +57,26 @@ var matchup_app = function() {
         });
     });
 
-   matchup.controller('tabCtrl', function($scope) {
+    matchup.controller('tabCtrl', function($scope, $window) {
 
-       $scope.showHome = function() {
-           console.log('clicking home tab');
-       };
-       $scope.showVisitor = function() {
-           console.log('clicking visitor tab');
-       };
+        
 
-       $scope.navType = 'pills';
+        // $scope.$alert = $window.alert.bind(null);
+
+	    $scope.dropdown = [
+		    {text: 'HOME', href: "#clickingHome"},
+		    {text: 'VISITOR', href: "#clickingVisitor"}
+	    ];
+
+        // $scope.showHome = function() {
+        //     console.log('clicking home tab');
+        //     mixpanel.track("Hitting Home");
+        // };
+        // $scope.showVisitor = function() {
+        //     console.log('clicking visitor tab');
+        // };
+
+        $scope.navType = 'pills';
    });                      
 
 };
@@ -345,6 +355,8 @@ function drawDag(data, box) {
 
 };
 
+
+
 // =====================================================================
 // =====================================================================
 
@@ -360,16 +372,34 @@ $.getJSON("/static/data/2014_schedule.json", function(json) {
     schedule_2014 = json;
 });
 
-//---------------------------
-//initialize the matchup app
-//---------------------------
+// ---------------------------
+// initialize the matchup app
+// ---------------------------
 
-// make the calendar 
 $(document).ajaxComplete(function() {
     $(function() {
+
+        // calendar
         $("#datepicker").datepicker();
+
+        // hide elements at start-up
+        $("#disp-game").prop("selectedIndex", -1).hide();
+        $("#butt-pop").hide();
+
+        $("a[href$='#clickingHome']").click(function(e){ 
+            e.preventDefault();
+            console.log('clicking Home');
+            return false; 
+        });
+        $("a[href$='#clickingVisitor']").click(function(e){ 
+            e.preventDefault();
+            console.log('clicking Visitor');
+            return false; 
+        });
+
     });
 });
+
 
 // initialize the angular app for the MATCHUP tab
 matchup_app();
@@ -379,5 +409,3 @@ matchup_app();
 // d3.json("/static/data/matchup_cr.json", function(data) {
 //     drawDag(data, "#svg-matchup");
 // });
-
-

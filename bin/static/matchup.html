@@ -14,7 +14,16 @@
     <script src="/static/js/d3.v3.min.js"></script>
 
     <script src="/static/js/jquery_ui.modified.js"></script>
+
     <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.6.0.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script src="http://mgcrea.github.io/angular-strap/js/angular-strap.js"></script>
+    
+
+<!-- start Mixpanel --><script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===e.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f);b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==
+typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");for(g=0;g<i.length;g++)f(c,i[g]);
+b._i.push([a,e,d])};b.__SV=1.2}})(document,window.mixpanel||[]);
+mixpanel.init("45d0daf8edd7355b4aaf0db51661258f");</script><!-- end Mixpanel -->
 
   </head>
   <!-- ========================== -->
@@ -25,51 +34,100 @@
           <li class="sidebar-header"><a href="">Pop's Factors</a></li>
           <li><a href="/">EXPLORE</a></li>
           <li><a href="/match-up">MATCH-UPS</a></li>
-          <li><a href="">DETAILS</a></li>
-          <li><a href="">ABOUT</a></li>
+          <li><a href="javascript:console.log('abc')"</a>DETAILS</li>
+          <li><a href="#clickingHome">ABOUT</a></li>
         </ul>
       </div>
           
       <!-- page content -->
       <div id="content-wrapper-matchup" ng-app="matchup">
 
-        <div id="content-header-matchup">
-          <center>Exploring Matchups</center>
-        </div>
+        <!-- <div class="content-header-matchup"> -->
+        <!--   <center>Exploring Matchups</center> -->
+        <!-- </div> -->
   
         <!--content! -->
-        <div id="content-container-matchup" ng-controller="ctrl_choose_matchup">
+        <div class="content-container-matchup" ng-controller="ctrl_choose_matchup">
 
-           <p align="center">Date:
-            <input type="text" id="datepicker" ng-model="text"/>
-          </p>
+          <!-- ---------------------------------------------------- -->
+          <div class="row1">
+
+            <div class="left-container">
+              
+              <br>
+              <p align="center">FIND YOUR GAME</p>
+              <p align="center">
+                <input type="text" id="datepicker" ng-model="text"/>
+              </p>
           
-          <div id="div-disp-game">
-            <select id="disp-game" size="15" ng-model="selectedValues"
-                    ng-change="selectionsChanged()">
-            </select>
+            </div>
+
+            <div class="right-container">
+              <div id="div-disp-game">
+                <select id="disp-game" size="1" ng-model="selectedValues"
+                        ng-change="selectionsChanged()">
+                </select>
+              </div>
+              
+              <div id="div-butt-pop" style="text-align:center;width:95%">
+                <br>
+                <button id="butt-pop" ng-click="submit()" type="button" class="btn btn-default btn-lg">
+                  <span class="glyphicon glyphicon-cog"></span> POP
+                </button>
+                <p  id="status"></p>
+              </div>
+
+              <br><br>
+              <p id="disp-game-text" align="center"></p>
+
+            </div>
+
           </div>
 
-          <div id="div-butt-pop" style="text-align:center;width:90%">
-            <button id="butt-pop" ng-click="submit()">POP</button>
-            <p  id='status'></p>
+          <hr>
+          <!-- ---------------------------------------------------- -->
+
+          <div class="row2">
+
+            <div class="left-container">
+              empty for now
+            </div>
+
+            <div class="right-container">
+
+              <div class="home-visitor" ng-controller="tabCtrl">
+
+                <div class="btn-group">
+                  <button type="button" class="btn" bs-dropdown="dropdown">Dropdown 
+                    <b class="caret">
+                    </b>
+                  </button>
+
+
+                </div>
+
+                <!-- <tabset vertical="false" direction="right"> -->
+                <!--   <tab heading="HOME" select="showHome()"></tab> -->
+                <!--   <tab heading="VISITOR" select="showVisitor()"></tab> -->
+                <!-- </tabset> -->
+
+              </div>
+              
+              <!-- <div class="svg-container-matchup"> -->
+	            <div id="svg-graph-matchup">
+                  <!-- This is the container for the svg. -->
+                </div>
+              <!-- </div> -->
+
+            </div> <!-- right container -->
+
           </div>
+          <!-- -------------------------------------------------- -->
 
-	      <div id='svg-matchup'>
-            <!-- This is the container for the svg. -->
-	      </div>
 
-          
-          <div ng-controller="tabCtrl">
-            <tabset>
-              <tab heading="home" select="showHome()"></tab>
-              <tab heading="away" select="showVisitor()"></tab>
-            </tabset>
-          </div>
-
-        </div> <!-- closing the content div -->
+        </div> <!-- content-container-matchup -->
         
-      </div>
+      </div>  <!-- content-wrapper-matchup -->
   </body>
   <script src="/static/js/matchup.js"></script>
   <!-- <script src="/static/js/dag.js"></script> -->

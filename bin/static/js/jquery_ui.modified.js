@@ -8636,8 +8636,20 @@ $.extend(Datepicker.prototype, {
             j = parseInt(k) + 1;
 		    _html += "<option value='"+k +"'>"+ String(j) + ". "+_game + "</option>";
 	    };        
-        
-        $("#disp-game").html(_html);
+       
+
+        try {
+            $("#disp-game-text").html("");
+            d3.select("#disp-game").attr("size", _games.length);
+            $("#disp-game").html(_html);
+            $("#disp-game").show();
+            $("#butt-pop").show();
+        }
+        catch(err) {
+            $("#disp-game").hide();
+            $("#butt-pop").hide();
+            $("#disp-game-text").html("No Games Today");
+        }
 
 	},
 
